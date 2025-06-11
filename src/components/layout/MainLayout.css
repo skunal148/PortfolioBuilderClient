@@ -1,0 +1,83 @@
+/* src/components/layout/MainLayout.css */
+.main-layout {
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom right, var(--color-background-dark), var(--color-background-light));
+  color: var(--color-text-light);
+}
+
+.main-nav {
+  background-color: var(--color-background-light);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 150ms;
+}
+.nav-brand:hover {
+  color: var(--color-text-light);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-medium);
+  text-decoration: none;
+  transition: background-color 150ms, color 150ms;
+}
+
+.nav-link:hover {
+  background-color: #334155;
+  color: white;
+}
+
+.nav-link.active {
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.logout-button {
+  background-color: var(--color-secondary);
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+.logout-button:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+.main-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}

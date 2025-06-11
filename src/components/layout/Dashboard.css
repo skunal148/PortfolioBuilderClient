@@ -1,0 +1,176 @@
+/* src/components/layout/Dashboard.css */
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 640px) { /* sm breakpoint */
+  .dashboard-header {
+    flex-direction: row;
+  }
+}
+
+.dashboard-title {
+  font-size: 2.25rem; /* text-4xl */
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 640px) {
+  .dashboard-title {
+    margin-bottom: 0;
+  }
+}
+
+.add-project-button {
+  background-color: #10b981;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  transition: all 150ms ease-in-out;
+  font-size: 1.125rem;
+  cursor: pointer;
+}
+.add-project-button:hover {
+  background-color: #059669;
+  transform: scale(1.05);
+}
+
+.dashboard-empty-state {
+  text-align: center;
+  padding: 5rem 2rem;
+  margin-top: 2rem;
+  background-color: #1e293b; /* slate-800 */
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+.dashboard-empty-state h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-top: 1rem;
+}
+.dashboard-empty-state p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #94a3b8;
+}
+
+.portfolios-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem;
+}
+@media (min-width: 768px) { /* md breakpoint */
+  .portfolios-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) { /* lg breakpoint */
+  .portfolios-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.portfolio-card {
+  background-color: #1e293b;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: all 300ms ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+.portfolio-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px 0 rgba(16, 185, 129, 0.3); /* shadow-emerald-400/40 */
+}
+
+.card-preview-image {
+  height: 13rem; /* h-52 */
+  background-color: #334155;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.card-template-label {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background-color: rgba(15, 23, 42, 0.7); /* bg-slate-900 bg-opacity-70 */
+  color: #6ee7b7; /* emerald-300 */
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-weight: 500;
+}
+
+.card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 300ms;
+}
+.portfolio-card:hover .card-title {
+  color: #34d399;
+}
+
+.card-info {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #334155;
+}
+
+.card-button-edit, .card-button-delete {
+  flex: 1;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: background-color 150ms;
+  border: none;
+  cursor: pointer;
+}
+
+.card-button-edit {
+  background-color: #10b981;
+  color: white;
+}
+.card-button-edit:hover {
+  background-color: #059669;
+}
+
+.card-button-delete {
+  background-color: #e11d48;
+  color: white;
+}
+.card-button-delete:hover {
+  background-color: #be123c;
+}

@@ -1,0 +1,38 @@
+/* src/index.css */
+
+/* This is your central theme definition. 
+  To change your app's colors, you only need to edit the values here.
+*/
+:root {
+  --color-background-dark: #0f172a;
+  --color-background-light: #1e293b;
+  --color-primary: #10b981; /* The main green color */
+  --color-primary-hover: #059669;
+  --color-secondary: #e11d48; /* The main red/rose color for logout/delete */
+  --color-secondary-hover: #be123c;
+  --color-text-light: #f1f5f9;
+  --color-text-medium: #cbd5e1;
+  --color-text-dark: #94a3b8;
+  --color-accent: #34d399;
+  --color-border: #334155;
+  --color-input-background: #334155;
+  --color-input-focus-border: var(--color-accent);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-background-dark); /* Use the variable */
+}
+
+#root {
+  height: 100%;
+}

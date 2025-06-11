@@ -1,0 +1,87 @@
+.landing-page-container {
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(to bottom right, #0f172a, #1e293b);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.landing-content {
+  max-width: 48rem;
+  padding: 1.5rem;
+}
+
+.landing-title {
+  font-size: 3.75rem; /* 60px */
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.title-highlight {
+  color: #34d399;
+}
+
+.landing-subtitle {
+  font-size: 1.25rem; /* 20px */
+  color: #cbd5e1; /* slate-300 */
+  margin-bottom: 2.5rem;
+}
+
+.landing-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.button-primary, .button-secondary {
+  /* This ensures padding and border are included in the element's total width and height */
+  box-sizing: border-box; 
+  
+  /* Sizing and Alignment */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2.5rem;
+  border: 2px solid; /* Reserve 2px for the border on both */
+
+  /* Typography and Appearance */
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-decoration: none;
+
+  /* Animation */
+  transition: all 150ms ease-in-out;
+}
+
+/* --- Primary "Get Started" Button --- */
+.button-primary {
+  background-color: #10b981; /* emerald-500 */
+  border-color: #10b981;     /* Make border color match background */
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: #059669; /* Darker emerald */
+  border-color: #059669;
+  transform: scale(1.05);
+}
+
+/* --- Secondary "Login" Button --- */
+.button-secondary {
+  background-color: transparent;
+  border-color: #10b981; /* Visible emerald border */
+  color: #f1f5f9;       /* Light text color */
+}
+
+.button-secondary:hover {
+  background-color: #10b981;
+  border-color: #10b981;
+  color: white;
+  transform: scale(1.05);
+}
