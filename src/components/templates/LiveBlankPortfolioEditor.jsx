@@ -286,23 +286,78 @@ function LiveBlankPortfolioEditor() {
                     </div>
 
                     <div className="editor-section">
+                        <h3 className="section-title">Certifications</h3>
+                        <Droppable droppableId="certifications-list" type="CERTIFICATIONS">
+                            {(provided) => (
+                                <div {...provided.droppableProps} ref={provided.innerRef}>
+                                    {certifications.map((cert, index) => (
+                                        <Draggable key={cert.id} draggableId={cert.id} index={index}>
+                                            {(p) => (
+                                                <div className="project-editor-card" ref={p.innerRef} {...p.draggableProps}>
+                                                    <div className="card-header">
+                                                        <span {...p.dragHandleProps}><DragHandleIcon /></span>
+                                                        <h4>{cert.title || `Certification ${index + 1}`}</h4>
+                                                        <button onClick={() => handleRemoveCertification(cert.id)} className="delete-item-button"><TrashIcon /></button>
+                                                    </div>
+                                                    <div className="input-group">
+                                                        <label className="input-label">Certification Name</label>
+                                                        <input type="text" value={cert.title} onChange={(e) => handleCertificationChange(cert.id, 'title', e.target.value)} className="editor-input" />
+                                                    </div>
+                                                    <div className="input-group">
+                                                        <label className="input-label">Issuing Body</label>
+                                                        <input type="text" value={cert.issuingBody} onChange={(e) => handleCertificationChange(cert.id, 'issuingBody', e.target.value)} className="editor-input" />
+                                                    </div>
+                                                    <div className="input-group">
+                                                        <label className="input-label">Date Issued</label>
+                                                        <input type="text" value={cert.dateIssued} onChange={(e) => handleCertificationChange(cert.id, 'dateIssued', e.target.value)} className="editor-input" />
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    ))}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                        <button onClick={handleAddCertification} className="add-item-button full-width">Add Certification</button>
+                    </div>
+
+                    <div className="editor-section">
                         <h3 className="section-title">Customize Styles & Layout</h3>
 
                         <div className="input-group">
-                            <label htmlFor="fontFamily" className="input-label">Font Family</label>
-                            <select id="fontFamily" value={fontFamily} onChange={(e) => setFontFamily(e.target.value)} className="editor-input">
-                                {fontOptions.map(font => (
-                                    <option key={font.value} value={font.value}>{font.name}</option>
-                                ))}
-                            </select>
+                            <label className="input-label">Background Style</label>
+                            <div className="radio-group">
+                                <label>
+                                    <input type="radio" value="theme" checked={backgroundType === 'theme'} onChange={() => handleBackgroundTypeChange('theme')} />
+                                    Predefined Theme
+                                </label>
+                                <label>
+                                    <input type="radio" value="customImage" checked={backgroundType === 'customImage'} onChange={() => handleBackgroundTypeChange('customImage')} />
+                                    Custom Image
+                                </label>
+                            </div>
                         </div>
 
+                        {backgroundType === 'theme' ? (
+                            <div className="input-group">
+                                <label htmlFor="backgroundTheme" className="input-label">Select Theme</label>
+                                <select id="backgroundTheme" value={selectedBackgroundTheme} onChange={(e) => handleBackgroundThemeChange(e.target.value)} className="editor-input">
+                                    {predefinedBackgroundThemes.map(theme => (<option key={theme.id} value={theme.id}>{theme.name}</option>))}
+                                </select>
+                            </div>
+                        ) : (
+                            <div className="input-group">
+                                <label htmlFor="customBackgroundImage" className="input-label">Custom Background Image URL</label>
+                                <input type="text" id="customBackgroundImage" value={customBackgroundImageUrl} onChange={(e) => setCustomBackgroundImageUrl(e.target.value)} className="editor-input" placeholder="https://example.com/background.jpg" />
+                            </div>
+                        )}
+
+                        {/* ... The rest of the customization controls (fonts, colors, etc.) go here ... */}
                         <div className="input-group">
-                            <label htmlFor="headerLayout" className="input-label">Header Layout</label>
-                            <select id="headerLayout" value={headerLayout} onChange={(e) => setHeaderLayout(e.target.value)} className="editor-input">
-                                {headerLayoutOptions.map(layout => (
-                                    <option key={layout.id} value={layout.id}>{layout.name}</option>
-                                ))}
+                            <label htmlFor="fontFamily" className="input-label">Font Family</label>
+                            <select id="fontFamily" value={fontFamily} onChange={(e) => setFontFamily(e.target.value)} className="editor-input">
+                                {fontOptions.map(font => (<option key={font.value} value={font.value}>{font.name}</option>))}
                             </select>
                         </div>
 
