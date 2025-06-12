@@ -68,7 +68,7 @@
 }
 .portfolio-card:hover {
   transform: scale(1.02);
-  box-shadow: 0 0 20px 0 rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 20px 0 var(--color-background-light)
 }
 
 .card-preview-image {

@@ -9,10 +9,8 @@
 }
 
 .portfolio-body {
-  
-
   margin: 0 auto;
-  padding: 2rem; /* Move padding here */
+  padding: 10rem; /* Move padding here */
   background-color: rgba(0, 0, 0, 0.2); /* Adds a subtle dark layer for readability */
 }
 

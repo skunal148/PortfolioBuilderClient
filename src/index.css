@@ -4,19 +4,22 @@
   To change your app's colors, you only need to edit the values here.
 */
 :root {
-  --color-background-dark: #0f172a;
-  --color-background-light: #1e293b;
-  --color-primary: #10b981; /* The main green color */
-  --color-primary-hover: #059669;
-  --color-secondary: #e11d48; /* The main red/rose color for logout/delete */
-  --color-secondary-hover: #be123c;
-  --color-text-light: #f1f5f9;
-  --color-text-medium: #cbd5e1;
-  --color-text-dark: #94a3b8;
-  --color-accent: #34d399;
-  --color-border: #334155;
-  --color-input-background: #334155;
-  --color-input-focus-border: var(--color-accent);
+    /* --- "Peach & Warm Gray" Theme --- */
+  --color-background-dark: #c8cbce;      /* Almost White */
+  --color-background-light: #e9e6e6;     /* White */
+  --color-primary: #84A98C;              /* Sage Green */
+  --color-primary-hover: #6a8d70;        /* Darker Sage */
+  --color-secondary: #e53e3e;
+  --color-secondary-hover: #c53030;
+  --color-text-light: #374151;            /* Dark Stone (for headings) */
+  --color-text-medium: #4B5563;           /* Medium Stone (for body) */
+  --color-text-dark: #9CA3AF;             /* Light Stone (for tertiary) */
+  --color-accent: var(--color-primary);
+
+  /* --- UI Element Variables --- */
+  --color-border: #E5E7EB;
+  --color-input-background: #FFFFFF;
+  --color-input-focus-border: var(--color-primary);
 }
 
 * {

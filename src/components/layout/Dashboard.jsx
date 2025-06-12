@@ -88,7 +88,6 @@ function Dashboard() {
           {portfolios.map((portfolio) => (
             <div key={portfolio.id} className="portfolio-card">
               <div className="card-preview-image" style={{ backgroundImage: `url(${templateBackgroundImages[portfolio.templateId] || templateBackgroundImages.default})` }}>
-                <span className="card-template-label">Template: {portfolio.templateId}</span>
               </div>
               <div className="card-content">
                 <h3 className="card-title">{portfolio.name || 'Untitled Portfolio'}</h3>

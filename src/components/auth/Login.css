@@ -110,3 +110,13 @@
   text-decoration: underline;
   color: var(--color-accent);
 }
+
+.button-primary {
+  background-color: var(--color-primary); /* Blanche Dalmond */
+  color: #000000;                         /* Change text color to Black for readability */
+  /* ... other properties remain the same ... */
+}
+.button-primary:hover {
+  background-color: var(--color-primary-hover);
+  /* ... */
+}
