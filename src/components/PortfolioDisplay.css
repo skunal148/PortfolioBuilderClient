@@ -2,14 +2,15 @@
 
 .portfolio-container {
   /* The background is now set by an inline style from the editor */
-  background-size: cover;
+ background-size: cover;
   background-position: center;
   transition: all 150ms ease-in-out;
   min-height: 100%; /* Ensure it fills the preview panel */
 }
 
 .portfolio-body {
-  max-width: 900px;
+  
+
   margin: 0 auto;
   padding: 2rem; /* Move padding here */
   background-color: rgba(0, 0, 0, 0.2); /* Adds a subtle dark layer for readability */

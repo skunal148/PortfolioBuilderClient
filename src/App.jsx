@@ -14,7 +14,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import TemplateSelection from './components/templates/TemplateSelection';
 import LiveBlankPortfolioEditor from './components/templates/LiveBlankPortfolioEditor';
-
+import PortfolioPublicView from './components/PortfolioPublicView';
 import './App.css';
 
 
@@ -58,6 +58,7 @@ function App() {
           element={!currentUser ? <LandingPage /> : <Navigate to="/dashboard" replace />}/>
         <Route path="/login" element={!currentUser ? <Login /> : <Navigate to="/dashboard" replace />} />
         <Route path="/signup" element={!currentUser ? <SignUp /> : <Navigate to="/dashboard" replace />} />
+        <Route path="/portfolio/:portfolioId" element={<PortfolioPublicView />} />
         
         {/* --- Protected Routes --- */}
         <Route element={<ProtectedRoute user={currentUser}/>}>
