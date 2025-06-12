@@ -81,3 +81,8 @@
   margin: 0 auto;
   padding: 1.5rem;
 }
+
+.main-content.full-width {
+  max-width: none;
+  padding: 0;
+}

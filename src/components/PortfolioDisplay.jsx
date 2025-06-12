@@ -25,56 +25,46 @@ function PortfolioDisplay({ portfolioData }) {
   }
 
   // Destructure all potential props from the portfolio data
-  const {
-    name,
-    profilePicture,
-    linkedinUrl,
-    githubUrl,
-    aboutMe,
-    projects = [],
-    skills = [],
-    customSections = [],
-    certifications = [],
-    tagline,
-    fontFamily = 'sans-serif',
-    headingColor = '#f1f5f9',
-    bodyTextColor = '#cbd5e1',
-    accentColor = '#34d399',
-    secondaryAccentColor = '#e11d48',
-    headerLayout = 'image-top-center',
-    resumeUrl
+ const {
+    name, profilePicture, tagline, aboutMe, projects = [], skills = [],
+    headingColor, bodyTextColor, accentColor, headerLayout, linkedinUrl,githubUrl,resumeUrl,certifications,
+    containerStyle // This object is now passed directly from the editor
   } = portfolioData;
+
 
   const sectionMargin = '4rem'; // Consistent spacing between sections
 
   // --- RENDER FUNCTIONS FOR EACH SECTION ---
 
-  const renderHeader = () => (
-    <header className={`portfolio-header layout-${headerLayout}`} style={{ borderColor: accentColor }}>
-      {profilePicture && (
-        <img 
-          src={profilePicture} 
-          alt={name || 'Profile'} 
-          className="profile-picture"
-          style={{ borderColor: accentColor }}
-        />
-      )}
-      <div className="header-info">
-        <h1 className="portfolio-name" style={{ color: headingColor }}>{name}</h1>
-        <p className="portfolio-tagline" style={{ color: bodyTextColor }}>{tagline}</p>
-        <div className="social-links">
-          {linkedinUrl && <SocialIcon url={linkedinUrl}><LinkedInIcon /></SocialIcon>}
-          {githubUrl && <SocialIcon url={githubUrl}><GitHubIcon /></SocialIcon>}
-        </div>
-        {resumeUrl && (
-          <a href={resumeUrl} target="_blank" rel="noopener noreferrer" download className="resume-download-link" style={{ backgroundColor: `${accentColor}20`, color: accentColor }}>
-            <DownloadIcon />
-            Download Resume
-          </a>
-        )}
+    const renderHeader = () => {
+    const socialLinks = (
+      <div className="social-links">
+        {linkedinUrl && <SocialIcon url={linkedinUrl} color={accentColor}><LinkedInIcon /></SocialIcon>}
+        {githubUrl && <SocialIcon url={githubUrl} color={accentColor}><GitHubIcon /></SocialIcon>}
       </div>
-    </header>
-  );
+    );
+
+    const resumeLink = resumeUrl && (
+      <a href={resumeUrl} target="_blank" rel="noopener noreferrer" download className="resume-download-link" style={{ backgroundColor: `${accentColor}20`, color: accentColor }}>
+        <DownloadIcon />
+        Download Resume
+      </a>
+    );
+
+    return (
+      <header className={`portfolio-header layout-${headerLayout}`} style={{ borderColor: accentColor }}>
+        {profilePicture && (
+          <img src={profilePicture} alt={name || 'Profile'} className="profile-picture" style={{ borderColor: accentColor }}/>
+        )}
+        <div className="header-info">
+          <h1 className="portfolio-name" style={{ color: headingColor }}>{name}</h1>
+          {tagline && <p className="portfolio-tagline" style={{ color: bodyTextColor }}>{tagline}</p>}
+          {socialLinks}
+          {resumeLink}
+        </div>
+      </header>
+    );
+  };
 
   const renderAboutMe = () => aboutMe && (
     <section style={{ marginBottom: sectionMargin }}>
@@ -117,15 +107,30 @@ function PortfolioDisplay({ portfolioData }) {
     </section>
   );
 
+  const renderCertifications = () => certifications && certifications.length > 0 && (
+    <section style={{ marginBottom: sectionMargin }}>
+      <h2 className="section-heading" style={{ color: headingColor }}>Certifications</h2>
+      <div className="certifications-list">
+        {certifications.map((cert) => (cert.title || cert.issuingBody) && (
+          <div key={cert.id} className="certification-item" style={{ borderLeftColor: accentColor }}>
+            <h3 className="certification-title" style={{ color: headingColor }}>{cert.title}</h3>
+            <p className="certification-issuer" style={{ color: bodyTextColor }}>{cert.issuingBody}</p>
+            <p className="certification-date" style={{ color: bodyTextColor, opacity: 0.7 }}>{cert.dateIssued}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
   // Render functions for Certifications and Custom Sections would follow the same pattern...
 
   return (
-    <div className="portfolio-container" style={{ fontFamily: fontFamily, backgroundColor: 'rgb(47 46 46)' /* Or a background variable */ }}>
-      {renderHeader()}
+    <div className="portfolio-container" style={containerStyle}>
       <div className="portfolio-body">
+        {renderHeader()}
         {renderAboutMe()}
         {renderSkills()}
         {renderProjects()}
+        {renderCertifications()} 
         {/* Render other sections here */}
       </div>
     </div>

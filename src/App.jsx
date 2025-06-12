@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 
 // --- Firebase Imports ---
 import { auth } from './firebase'; // Import auth from your firebase config
@@ -16,6 +16,15 @@ import TemplateSelection from './components/templates/TemplateSelection';
 import LiveBlankPortfolioEditor from './components/templates/LiveBlankPortfolioEditor';
 
 import './App.css';
+
+
+const ProtectedRoute = ({ user }) => {
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+  // This <Outlet> will render the child route's component (e.g., MainLayout)
+  return <Outlet />;
+};
 
 function App() {
   // State to hold the current user object from Firebase
@@ -46,24 +55,19 @@ function App() {
         {/* If a user is logged in, the root path redirects to the dashboard */}
         <Route
           path="/"
-          element={!currentUser ? <LandingPage /> : <Navigate to="/dashboard" replace />}
-        />
+          element={!currentUser ? <LandingPage /> : <Navigate to="/dashboard" replace />}/>
         <Route path="/login" element={!currentUser ? <Login /> : <Navigate to="/dashboard" replace />} />
         <Route path="/signup" element={!currentUser ? <SignUp /> : <Navigate to="/dashboard" replace />} />
         
         {/* --- Protected Routes --- */}
-        {/* These routes are only accessible if a user is logged in */}
-        <Route
-          path="/dashboard"
-          element={currentUser ? <MainLayout /> : <Navigate to="/login" replace />}
-        >
-          {/* The Dashboard is a child of MainLayout */}
-          <Route index element={<Dashboard />} /> 
-          
+        <Route element={<ProtectedRoute user={currentUser}/>}>
+        <Route element={<MainLayout/>}>
+          <Route path="dashboard" element={<Dashboard />} />
+            <Route path="choose-template" element={<TemplateSelection />} />
+            <Route path="create-blank-portfolio" element={<LiveBlankPortfolioEditor />} />
+            <Route path="edit-blank/:portfolioId" element={<LiveBlankPortfolioEditor />} />
         </Route>
-        <Route path="choose-template" element={<TemplateSelection />} />
-        <Route path="create-blank-portfolio" element={<LiveBlankPortfolioEditor />}/>
-        
+        </Route>
         
         {/* Fallback Route */}
         <Route path="*" element={<Navigate to="/" replace />} />
