@@ -61,6 +61,8 @@ function Dashboard() {
   const handleEditPortfolio = (portfolio) => {
     if (portfolio.templateId === 'blank') {
       navigate(`/edit-blank/${portfolio.id}`);
+    } else if (portfolio.templateId === 'style-corp-sleek') { // <-- ADD THIS CASE
+        navigate(`/edit-corp-portfolio/${portfolio.id}`); 
     } else {
       alert(`Editing for template "${portfolio.templateId}" is not set up yet.`);
     }

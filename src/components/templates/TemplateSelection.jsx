@@ -44,6 +44,9 @@ function TemplateSelection() {
     // This will navigate to the correct editor for the chosen template
     if (templateId === 'blank') {
       navigate('/create-blank-portfolio');
+    }
+    else if (templateId === 'style-corp-sleek') { // <-- ADD THIS CASE
+        navigate(`/create-corp-portfolio/${templateId}`); 
     } else {
       alert(`The editor for the "${templateId}" template is not yet built.`);
       // Example future routes:

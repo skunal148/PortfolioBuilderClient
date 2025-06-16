@@ -1,13 +1,10 @@
-// src/components/PortfolioPublicView.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-
-// Firebase imports
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
-// We can reuse the PortfolioDisplay component for the actual rendering
 import PortfolioDisplay from './PortfolioDisplay';
+import { blankCanvasPalettes } from '../themes'; // Import the theme data
 
 function PortfolioPublicView() {
   const { portfolioId } = useParams();
@@ -22,64 +19,57 @@ function PortfolioPublicView() {
         setLoading(false);
         return;
       }
-
       try {
-        const portfolioRef = doc(db, 'portfolios', portfolioId);
-        const docSnap = await getDoc(portfolioRef);
-
+        const docSnap = await getDoc(doc(db, 'portfolios', portfolioId));
         if (docSnap.exists()) {
           setPortfolioData(docSnap.data());
         } else {
           setError('This portfolio does not exist.');
         }
       } catch (err) {
-        console.error("Error fetching portfolio:", err);
         setError('Failed to load portfolio data.');
       } finally {
         setLoading(false);
       }
     };
-
     fetchPortfolio();
   }, [portfolioId]);
 
-  if (loading) {
-    return <div className="loading-container">Loading Portfolio...</div>;
-  }
-
-  if (error) {
-    return (
-      <div className="error-container">
-        <h2>Error</h2>
-        <p>{error}</p>
-        <Link to="/" className="home-link">Go to Homepage</Link>
-      </div>
-    );
-  }
-
-  // We reuse the PortfolioDisplay to show the data.
-  // We need to pass the containerStyle that the editor would normally calculate.
-  // For simplicity, we'll calculate it here based on the loaded data.
+  // This function correctly calculates the container style based on the loaded data
   const getContainerStyle = () => {
-    let style = { fontFamily: portfolioData.fontFamily || 'sans-serif' };
-    if (portfolioData.backgroundType === 'customImage' && portfolioData.customBackgroundImageUrl) {
-      style.backgroundImage = `url(${portfolioData.customBackgroundImageUrl})`;
-    } else {
-        // This is a simplified version of the theme logic from the editor
-        style.backgroundColor = '#1e293b'; // Default dark background
-        if (portfolioData.selectedBackgroundTheme === 'light-gentle') {
-            style.backgroundColor = '#F3F4F6';
-        }
+    if (!portfolioData) return {};
+    
+    let style = { fontFamily: portfolioData.fontFamily };
+
+    if (portfolioData.templateId === 'blank') {
+      if (portfolioData.backgroundType === 'customImage' && portfolioData.customBackgroundImageUrl) {
+        style.backgroundImage = `url(${portfolioData.customBackgroundImageUrl})`;
+      } else {
+        const theme = blankCanvasPalettes.find(t => t.id === portfolioData.selectedBackgroundTheme) || blankCanvasPalettes[0];
+        Object.assign(style, theme.style);
+      }
+    } else if (portfolioData.templateId === 'style-corp-sleek') {
+        // For non-blank templates, we just use the saved background color
+        style.backgroundColor = portfolioData.portfolioBackgroundColor;
     }
+    
     return style;
   };
 
+  if (loading) return <div className="loading-container">Loading Portfolio...</div>;
+  if (error) return <div className="error-container"><h2>Error</h2><p>{error}</p><Link to="/" className="home-link">Homepage</Link></div>;
+
   return (
     <div>
-        <PortfolioDisplay portfolioData={{...portfolioData, containerStyle: getContainerStyle()}} />
-        <footer className="public-footer">
-            <Link to="/">Created with PortfolioBuilder</Link>
-        </footer>
+      <PortfolioDisplay 
+        portfolioData={{
+          ...portfolioData, 
+          containerStyle: getContainerStyle() // Pass the calculated style object
+        }} 
+      />
+      <footer className="public-footer">
+        <Link to="/">Created with PortfolioBuilder</Link>
+      </footer>
     </div>
   );
 }

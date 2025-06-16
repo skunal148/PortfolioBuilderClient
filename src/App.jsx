@@ -14,6 +14,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import TemplateSelection from './components/templates/TemplateSelection';
 import LiveBlankPortfolioEditor from './components/templates/LiveBlankPortfolioEditor';
+import LiveModernProfessionalEditor from './components/templates/LiveModernProfessionalEditor';
 import PortfolioPublicView from './components/PortfolioPublicView';
 import './App.css';
 
@@ -67,6 +68,8 @@ function App() {
             <Route path="choose-template" element={<TemplateSelection />} />
             <Route path="create-blank-portfolio" element={<LiveBlankPortfolioEditor />} />
             <Route path="edit-blank/:portfolioId" element={<LiveBlankPortfolioEditor />} />
+            <Route path="create-corp-portfolio/:templateIdFromUrl" element={<LiveModernProfessionalEditor />} />
+            <Route path="edit-corp-portfolio/:portfolioId" element={<LiveModernProfessionalEditor />} />
         </Route>
         </Route>
         
